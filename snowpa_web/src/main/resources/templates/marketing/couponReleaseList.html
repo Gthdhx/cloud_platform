@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+</head>
+
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal addNews_btn" id="refresh" lay-filter="refresh">刷新</a>
+            </div>
+
+        </form>
+    </blockquote>
+
+
+    <table class="layui-table" id="couponReleaseList" lay-filter="couponReleaseList"></table>
+
+</form>
+
+<script type="text/html" id="toolbar">
+    </script>
+
+
+
+
+
+
+<script type="text/javascript" src="/page/marketing/couponReleaseList.js"></script>
+
+
+</body>
+
+</html>

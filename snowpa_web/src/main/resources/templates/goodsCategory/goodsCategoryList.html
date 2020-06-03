@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+</head>
+
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" id="categoryName" name="categoryName" class="layui-input searchVal"
+                           placeholder="请输入分类名称"/>
+                </div>
+                <a class="layui-btn search_btn" data-type="reload" id="categoryTable">搜索</a>
+            </div>
+
+
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-normal addNews_btn" id="add">添加分类</a>
+            </div>
+
+
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-danger layui-btn-normal editor_holder_btn" id="edit">编辑分类</a>
+            </div>
+
+
+            <div class="layui-inline">
+                <a class="layui-btn layui-btn-danger layui-btn-normal delAll_btn" id="del">删除分类</a>
+            </div>
+
+
+        </form>
+    </blockquote>
+
+    <table class="layui-table" id="categoryList" lay-filter="categoryList"></table>
+
+
+</form>
+
+<script type="text/javascript" src="/page/goodsCategory/goodsCategory.js"></script>
+
+</body>
+
+</html>

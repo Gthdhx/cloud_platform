@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+    <script th:inline="javascript">
+        var specificationsData = [[${specificationsData}]];
+    </script>
+</head>
+
+<body class="childrenBody">
+<!-- 添加和修改的弹出层开始 -->
+<div style="padding: 20px" id="">
+    <form class="layui-form " action="" lay-filter="dataFrm" id="dataFrm">
+        <input type="hidden" name="id" lay-verify="required" autocomplete="off" class="layui-input">
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label">规格名称:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="specificationsName" name="specificationsName" lay-verify="required"
+                           lay-filter="specificationsName" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">成本价(不含税):</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="costPrice" name="costPrice" lay-verify="required|number"
+                           lay-filter="costPrice" class="layui-input">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label">邮费:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="postage" name="postage" lay-verify="required|number"
+                           lay-filter="postage" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">批发价(不含税):</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="wholesalePrice" name="wholesalePrice" lay-verify="required|number"
+                           lay-filter="wholesalePrice" class="layui-input">
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="layui-form-item">
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">排序:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sort" name="sort" lay-filter="sort" lay-verify="required|number"
+                           class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">零售单价(不含税):</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="retailPrice" name="retailPrice" lay-verify="required|number"
+                           lay-filter="retailPrice" class="layui-input">
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item" style="text-align: center;" hidden="hidden">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release"
+                        lay-submit lay-filter="specificationsUpdateSubmit">提交
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script type="text/javascript" src="/page/goods/goodsSpecificationsUpdate.js"></script>
+
+</body>
+
+</html>

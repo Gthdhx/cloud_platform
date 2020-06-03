@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+</head>
+
+<body class="childrenBody">
+<form class="layui-form">
+    <!--搜索栏-->
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <input type="text" id="orderCode" name="orderCode" class="layui-input searchVal"
+                           placeholder="请输入订单号"/>
+                </div>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">支付状态：</label>
+                    <div class="layui-input-block">
+                        <select id="payStatus" name="payStatus">
+                            <option value="">请选择</option>
+                            <option value="DSK">待收款</option>
+                            <option value="YSK">已收款</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-input-inline">
+                    <label class="layui-form-label">订单状态：</label>
+                    <div class="layui-input-block">
+                        <select id="orderStatus" name="orderStatus">
+                            <option value="">请选择状态</option>
+                            <option value="DFH">待发货</option>
+                            <option value="DSH">待收货</option>
+                            <option value="YSH">已收货</option>
+                            <option value="DPJ">待评价</option>
+                            <option value="GB">关闭</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn search_btn" data-type="reload" id="orderTable">搜索</a>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal addNews_btn" id="add" lay-filter="add">新增订单</a>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn layui-btn-normal addNews_btn" id="refresh" lay-filter="refresh">重置</a>
+                </div>
+
+            </div>
+        </form>
+    </blockquote>
+
+
+    <table class="layui-table" id="orderList" lay-filter="orderList"></table>
+
+</form>
+
+
+<script type="text/html" id="barDemo">
+    <a class="layui-btn  layui-btn-xs" lay-event="detail">订单详情</a>
+</script>
+
+<script type="text/javascript" src="/page/order/order.js"></script>
+
+</body>
+
+</html>

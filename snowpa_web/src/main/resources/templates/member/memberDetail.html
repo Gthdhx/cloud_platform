@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+
+    <script th:inline="javascript">
+        var memberDetail = [[${memberDetail}]];
+        console.log(memberDetail);
+    </script>
+
+</head>
+
+<body class="childrenBody">
+<blockquote class="layui-elem-quote quoteBox">
+    <div class="layui-card">
+        <div class="layui-card-header">基础信息</div>
+        <div class="layui-card-body">
+            <form class="layui-form " action="" lay-filter="dataFrm" id="dataFrm">
+
+                <div class="layui-form-item">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">微信号:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="wechatCode" name="wechatCode" class="layui-input"
+                                   disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">用户昵称:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="nickname" name="nickname" class="layui-input"
+                                   disabled="disabled">
+                        </div>
+                    </div>
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">真实姓名:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="realName" name="realName" class="layui-input">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">手机号码:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="phone" name="phone"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">推荐人:</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="referrerName" name="referrerName" class="layui-input">
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</blockquote>
+
+<blockquote class="layui-elem-quote quoteBox">
+    <div class="layui-card-header">收货地址</div>
+    <div class="layui-card-body">
+        <table class="layui-table" id="addressList" lay-filter="addressList"></table>
+    </div>
+
+    </div>
+</blockquote>
+
+
+
+<script type="text/javascript" src="/page/member/memberDetail.js"></script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+    <script th:inline="javascript">
+        var checkData = [[${checkData}]];
+    </script>
+</head>
+
+<body class="childrenBody">
+<!-- 添加和修改的弹出层开始 -->
+<div style="padding: 20px" id="">
+    <form class="layui-form " action="" lay-filter="dataFrm" id="dataFrm">
+
+
+        <input type="hidden" name="checkId" lay-verify="required" autocomplete="off" class="layui-input">
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <div class="layui-inline">
+                    <label class="layui-form-label">审核意见:</label>
+                    <div class="layui-input-inline">
+                        <input type="radio" name="checkResult" value="Y" title="同意">
+                        <input type="radio" name="checkResult" value="N" title="拒绝">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注:</label>
+            <div class="layui-input-block">
+                <textarea name="remake" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="text-align: center;" hidden="hidden">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release"
+                        lay-filter="checkSubmit" lay-submit>提交
+                </button>
+                <!--            <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/page/distribution/memberExamine.js"></script>
+
+</body>
+
+</html>

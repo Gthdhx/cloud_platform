@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+    <script th:inline="javascript">
+        var distributorData = [[${distributorData}]];
+    </script>
+</head>
+
+<body class="childrenBody">
+<!-- 添加和修改的弹出层开始 -->
+<div style="padding: 20px" id="">
+    <form class="layui-form " action="" lay-filter="dataFrm" id="dataFrm">
+
+
+        <input type="hidden" name="id" lay-verify="required" autocomplete="off" class="layui-input">
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label">微信号:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="wechatCode" name="wechatCode" lay-verify="required" class="layui-input"
+                           disabled="disabled">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">用户昵称:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="nickname" name="nickname" lay-verify="required" class="layui-input"
+                           disabled="disabled">
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">客户类型:</label>
+                <div class="layui-input-block">
+                    <select name="userType" lay-verify="required" disabled="disabled">
+                        <option value="B">分销员</option>
+                        <option value="CO">客户</option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="layui-form-item">
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">真实姓名:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="realName" name="realName" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">电话号码:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="phone" name="phone" lay-verify="phone" lay-filter="phone"
+                           class="layui-input" oninput="value=value.replace(/[^\d]/g,'')">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+
+            <div class="layui-inline">
+                <label class="layui-form-label">所在省份:</label>
+
+                <div class="layui-input-inline">
+                    <select id="provinceCode" name="provinceCode" lay-filter="provinceCode" lay-search>
+                        <option value="">请选择省份</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">所在城市:</label>
+                <div class="layui-input-inline">
+                    <select id="cityCode" name="cityCode" lay-filter="cityCode" lay-search>
+                        <option value="">请选择城市</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">所在区域:</label>
+                <div class="layui-input-inline">
+                    <select id="areaCode" name="areaCode" lay-filter="areaCode" lay-search>
+                        <option value="">请选择区域</option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="layui-form-item">
+
+            <label class="layui-form-label">详细地址:</label>
+
+            <div class="layui-input-block">
+                <input type="text" name="detailAddress" id="detailAddress" placeholder="详细地址" autocomplete="off"
+                       class="layui-input">
+
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+
+            <label class="layui-form-label">上传营业执照:</label>
+            <div class="layui-input-inline uploadHeadImage">
+                <div class="layui-upload-drag" id="licenseImg">
+                    <i class="layui-icon"></i>
+                    <p>点击上传图片，或将图片拖拽到此处</p>
+                </div>
+            </div>
+            <div class="layui-input-inline">
+                <div class="layui-upload-list" id="pictures">
+                    <img class="layui-upload-img headImage" src="" id="demo1" style="width: 100%;height: 100%">
+                    <p id="picturesText"></p>
+                </div>
+            </div>
+            <input type="hidden" id="licensePhoto" name="licensePhoto" autocomplete="off" class="layui-input">
+            <div class="layui-inline">
+                <div class="layui-input-inline">
+                    <button type="button"
+                            class="layui-btn layui-btn-normal layui-btn-sm  layui-icon-release">
+                        <a id="oldPictures" target="_blank">查看执照</a>
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+
+            <label class="layui-form-label">主要营业范围:</label>
+            <div class="layui-input-block">
+                <input type="text" name="businessScope" id="businessScope" placeholder="主要营业范围" autocomplete="off"
+                       class="layui-input">
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">是否开启货到付款:</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="cashOnDelivery" value="N" title="关闭">
+                    <input type="radio" name="cashOnDelivery" value="Y" title="开启">
+                </div>
+            </div>
+
+            <div class="layui-inline">
+                <label class="layui-form-label">货到付款额度:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="quotaOnDelivery" name="quotaOnDelivery" lay-verify="number"
+                           class="layui-input" oninput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="layui-form-item" style="text-align: center;" hidden="hidden">
+            <div class="layui-input-block">
+                <button type="button" class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release"
+                        lay-filter="distributionUpdateSubmit" lay-submit>提交
+                </button>
+                <!--            <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/page/distribution/distributorUpdate.js"></script>
+
+</body>
+
+</html>

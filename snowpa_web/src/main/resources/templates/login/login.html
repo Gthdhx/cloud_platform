@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html class="loginHtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>生态环境智慧云平台</title>
+	<block name="common" th:replace="common/base"></block>
+	<script th:inline="javascript">
+		var captcha = [[${captcha}]];
+	</script>
+	<link rel="stylesheet" href="/css/login.css" media="all" />
+
+</head>
+<body class="loginBody">
+
+	<div class="wrap">
+		<div class="loginForm">
+			<form class="layui-form" action="" lay-filter="userLogin"  id="userLogin">
+				<div class="logoHead">
+					<h1 style="margin-top: 15px">生态环境智慧云平台</h1>
+				</div>
+				<div class="usernameWrapDiv">
+					<div class="usernameLabel">
+						<label>用户名:</label>
+					</div>
+					<div class="usernameDiv">
+						<i class="layui-icon layui-icon-username adminIcon"></i>
+						<input id="userName" class="layui-input adminInput" type="text" name="userName" placeholder="输入用户名" >
+					</div>
+				</div>
+				<div class="usernameWrapDiv">
+					<div class="usernameLabel">
+						<label>密码:</label>
+					</div>
+					<div class="passwordDiv">
+						<i class="layui-icon layui-icon-password adminIcon"></i>
+						<input id="password" class="layui-input adminInput" type="password" name="password" placeholder="输入密码">
+					</div>
+				</div>
+				<div class="usernameWrapDiv">
+					<div class="usernameLabel">
+						<label>验证码:</label>
+					</div>
+					<div class="cardDiv">
+						<input type="text" placeholder="请输入验证码" autocomplete="off"  name="code" id="code" class="layui-input">
+					</div>
+					<div class="codeDiv">
+						<img id="validateImg">
+					</div>
+				</div>
+				<div class="usernameWrapDiv">
+					<div class="submitDiv">
+						<button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript" src="/page/login/login.js"></script>
+
+</body>
+</html>

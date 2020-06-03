@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+</head>
+
+<body class="childrenBody">
+<form class="layui-form">
+    <blockquote class="layui-elem-quote quoteBox">
+        <form class="layui-form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">用户昵称:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="nickname" name="nickname" class="layui-input searchVal"
+                               placeholder="请输入用户昵称"/>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">手机号:</label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="phone" name="phone" class="layui-input searchVal"
+                               placeholder="请输入电话号码"/>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <a class="layui-btn search_btn" data-type="reload" id="memberTable">搜索</a>
+                    <a class="layui-btn search_btn" id="refresh" lay-filter="refresh">重置</a>
+                </div>
+            </div>
+            </div>
+        </form>
+    </blockquote>
+    <table class="layui-table" id="distributorCheckList" lay-filter="distributorCheckList"></table>
+</form>
+
+
+<script type="text/html" id="toolbar">
+    </script>
+<script type="text/html" id="barDemo">
+
+    {{#  if(d.checkStatus == 'DSH' ){ }}
+    <a class="layui-btn layui-btn-xs" lay-event="check">审核</a>
+    {{#  } }}
+
+</script>
+
+<script type="text/javascript" src="/page/distribution/distributorCheckList.js"></script>
+
+</body>
+
+</html>

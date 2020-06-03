@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+    <script th:inline="javascript">
+        var couponData = [[${couponData}]];
+    </script>
+</head>
+
+<body class="childrenBody">
+<!-- 添加和修改的弹出层开始 -->
+<div style="padding: 20px" id="">
+    <form class="layui-form " action="" lay-filter="dataFrm" id="dataFrm">
+
+        <input type="hidden" name="id" lay-verify="required" autocomplete="off" class="layui-input">
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">优惠券名称:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="couponName" name="couponName" lay-verify="required"
+                           lay-filter="couponName" class="layui-input">
+                </div>
+            </div>
+
+
+            <div class="layui-inline">
+                <label class="layui-form-label">优惠券类型:</label>
+                <div class="layui-input-inline">
+
+                    <select id="couponType" name="couponType" lay-filter="couponType"
+                            lay-verify="required">
+                        <option value="">请选择</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">优惠券面值:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="couponValue" name="couponValue" lay-verify="required|number"
+                           lay-filter="couponValue" class="layui-input"
+                           oninput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')">
+                </div>
+
+
+                <label class="layui-form-label">最低消费额度:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="minPrice" name="minPrice" lay-verify="required|number"
+                           lay-filter="minPrice" class="layui-input"
+                           oninput="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">使用开始时间:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="availableStartTime" name="availableStartTime" lay-verify="required"
+                           lay-filter="availableStartTime" class="layui-input">
+                </div>
+
+                <label class="layui-form-label">使用结束时间:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="availableEndTime" name="availableEndTime" lay-verify="required"
+                           lay-filter="availableEndTime" class="layui-input">
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">排序:</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="sort" name="sort" lay-filter="sort" lay-verify="required|number"
+                           class="layui-input" oninput="value=value.replace(/[^\d]/g,'')">
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否可组合使用:</label>
+            <div class="layui-input-block">
+                <input type="radio" name="unite" value="Y" title="是">
+                <input type="radio" name="unite" value="N" title="否">
+            </div>
+        </div>
+
+        <div class="layui-form-item" style="text-align: center;" hidden="hidden">
+            <div class="layui-input-block">
+                <button type="button"
+                        class="layui-btn layui-btn-normal layui-btn-sm layui-icon layui-icon-release"
+                        lay-filter="couponEditSubmit" lay-submit>提交
+                </button>
+                <!--            <button type="reset" class="layui-btn layui-btn-warm layui-btn-sm layui-icon layui-icon-refresh" >重置</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/page/marketing/couponUpdate.js"></script>
+
+</body>
+
+</html>

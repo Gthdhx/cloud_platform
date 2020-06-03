@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    druid:
+      post:
+        username: leon2400
+        password: Leon2400
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://rm-bp12h8iyzorsuwemw1o.mysql.rds.aliyuncs.com/snowpa_user_center?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+      get:
+        username: leon2400
+        password: Leon2400
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://rm-bp12h8iyzorsuwemw1o.mysql.rds.aliyuncs.com/snowpa_user_center?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+        initialSize: 5
+        minIdle: 5
+        maxActive: 20
+      filter: stat
+
+
+mybatis-plus:
+  # 如果是放在resource目录 classpath:/mapper/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: cn.snowpa.entity
+  configuration:
+    map-underscore-to-camel-case: false

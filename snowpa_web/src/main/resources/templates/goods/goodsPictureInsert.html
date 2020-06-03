@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <block name="common" th:replace="common/base"></block>
+    <script th:inline="javascript">
+        var goodsCode = [[${goodsCode}]];
+        var resource = [[${resource}]];
+
+    </script>
+</head>
+
+<body class="childrenBody">
+<form class="layui-form" lay-filter="dataFrm">
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">图片名称:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="pictureName" id="pictureName" lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+
+        <label class="layui-form-label">图片名称:</label>
+        <div class="layui-input-inline">
+            <select id="pictureType" name="pictureType" lay-verify="required">
+                <option value="" selected>请选择</option>
+                <option value="ZST">展示图</option>
+                <option value="XQT">详情图片</option>
+                <option value="LBT">轮播图</option>
+
+            </select>
+        </div>
+
+        <label class="layui-form-label">图片排序:</label>
+        <div class="layui-input-inline">
+            <input type="text" name="sequence" id="sequence" autocomplete="off"
+                   class="layui-input" placeholder="请输入图片排序" lay-verify="required|number">
+        </div>
+
+
+        <div class="layui-input-inline">
+            <button class="layui-btn " type="button" lay-filter="uploadSubmit" id="uploadSubmit" lay-submit="">上传图片
+            </button>
+        </div>
+
+    </div>
+</form>
+
+<div class="layui-upload">
+    <button style="display: none" type="button" class="layui-btn" id="upload">上传图片</button>
+
+    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+        预览图：
+        <div class="layui-upload-list" id="pictures"></div>
+    </blockquote>
+</div>
+
+
+<script type="text/javascript" src="/page/goods/goodsPictureInsert.js"></script>
+
+</body>
+
+</html>

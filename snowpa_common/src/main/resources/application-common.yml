@@ -1,0 +1,24 @@
+spring:
+  redis:
+    database: 0
+    host: 59.110.160.100
+    port: 6379
+    password: leson24s00x0024ff18s7605fd58333leonqwertgsyuimnbvcz
+    timeout: 36000 #超时时间
+    jedis:
+      pool:
+        max-active: 200 #最大连接数
+        max-idle: 100 #最大空闲连接 默认8
+        max-wait: 100  #默认-1 最大连接阻塞等待时间
+        min-idle: 0 #最小空闲连接
+
+
+config:
+  jwt:
+    secretKey: f4e2e52034348f86b67cde581c0f9eb5 # 加密秘钥
+    expire: 604800  # token有效时长，7天，单位秒
+    header: authorization
+
+RSA:
+  cipherKey: MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAIFI7ffCfNwkSFRfNdBpilLo3cHiH3hZ0FyK2EctXl8ebcKEACyT0SPI1lsqUtGmHO26twyL+TCtZHWtIoeLt9Kh4MVWWloZd00FNTxSI3phfwaKx0DG9w/fV+ft3b5g74IHv8MAHlkfPfz3ilCn4VLbQu14gtQ80OavVc08NI1RAgMBAAECgYBZJ3vDIYGNJhAi7s1jfYSADEnwjAj7q6P+TVk8LFMp8Qfr3a9pDj5pGPSJRbR7ErxcTCgzJMug/9GJPO3U30rRmjQqkqmYjBzBr+g8fMQttCQ48HASUnF9UagOK1zJ5GZnarXpCKytNrIrmzHozLNePioma1EdmqUZJ6GCqtnpYQJBAOXhdTCsiNfuoAM5sTW4GmUS92mYFZ9aG3QwGy8xRONLY/vYDKNhmtysZ0QPCs0X9yENRuX1KCcsuiVKCOFJ+LUCQQCP+XC2kzudHBEBJ/B0OevlhtiN7MyibmICGxQQU8jX39g1aCZkC8wS1QBmj5AikNU4t7QdEzCZuK40xO/SfW+tAkEAmn2m0ItjfBr2lrRTEBMmSf8xH1oCThG0maUq39Bwx4CHNV3BQJv8A4op7Gdfju4oO6I8n5be4VUB1MWoqh+YcQJAdu0N7NJLwOhpJ3JNTkR2Fl+/y+RZ2KajcKfbd+0tjxxJJTyF0cho5vlpXk6iOds3NaWRMx8h2yjRRaeTjmSs9QJBAN2DKptl8CwbwOSHNAP5CFqymVDnJtwnt0xPluUKF/dsn4URAH1n/1OsMQNbfUStqSAiOc41GOBmQWLeEq8Ib/4=
+  plainKey: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCBSO33wnzcJEhUXzXQaYpS6N3B4h94WdBcithHLV5fHm3ChAAsk9EjyNZbKlLRphzturcMi/kwrWR1rSKHi7fSoeDFVlpaGXdNBTU8UiN6YX8GisdAxvcP31fn7d2+YO+CB7/DAB5ZHz3894pQp+FS20LteILUPNDmr1XNPDSNUQIDAQAB
