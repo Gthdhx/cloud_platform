@@ -1,6 +1,7 @@
 package cn.snowpa.filter;
 
 import org.apache.shiro.web.util.WebUtils;
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -11,6 +12,7 @@ import java.io.IOException;
 /**
  * 全局跨域放开1
  */
+@Aspect
 @Component
 public class OriginFilter implements Filter {
 
