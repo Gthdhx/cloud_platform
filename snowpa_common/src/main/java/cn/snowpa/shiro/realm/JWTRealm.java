@@ -45,13 +45,13 @@ public class JWTRealm extends AuthorizingRealm {
         String account = JwtUtil.getClaim(token, Constant.ACCOUNT);
         // 帐号为空
         if (StringUtil.isEmpty(account)) {
-            throw new AuthenticationException("Token中帐号为空(The account in Token is empty.)");
+            throw new AuthenticationException("请重新登陆");
         }
         // 查询用户是否存在
         SysUser user = new SysUser();
         user.setAccount(account);
         if (user == null) {
-            throw new AuthenticationException("该帐号不存在(The account does not exist.)");
+            throw new AuthenticationException("该帐号不存在");
         }
         // 开始认证，要AccessToken认证通过，且Redis中存在RefreshToken，且两个Token时间戳一致
         if (JwtUtil.verify(token) && JedisUtil.exists(Constant.PREFIX_SHIRO_REFRESH_TOKEN + account)) {
@@ -62,7 +62,7 @@ public class JWTRealm extends AuthorizingRealm {
                 return new SimpleAuthenticationInfo(token, token, "userRealm");
             }
         }
-        throw new AuthenticationException("Token已过期(Token expired or incorrect.)");
+        throw new AuthenticationException("登陆已过期");
     }
 
     /**

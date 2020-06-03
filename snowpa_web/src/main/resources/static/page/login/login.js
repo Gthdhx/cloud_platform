@@ -21,7 +21,8 @@ layui.use(['form','layer','jquery'],function(){
         }).done(function(result) {
             console.log(result);
             if(result.code == 0){
-                window.location.href="/user/article";
+                localStorage.setItem("User-Token", result.data);
+                window.location.href="/user/article?token="+result.data;
             }else{
                 parent.layer.msg(result.msg, {time: 3000}, function () {
                     //重新加载父页面

@@ -1,8 +1,10 @@
 package cn.snowpa.controller.user;
 
 import cn.snowpa.shiro.common.ResponseBean;
+import cn.snowpa.utils.ResultUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +15,13 @@ public class UserController {
 
 
     @GetMapping("/article")
-    public ResponseBean article() {
+    public ResultUtil article() {
         Subject subject = SecurityUtils.getSubject();
         // 登录了返回true
         if (subject.isAuthenticated()) {
-            return new ResponseBean(HttpStatus.OK.value(), "您已经登录了(You are already logged in)", null);
+            return new ResultUtil(HttpStatus.OK.value(), "您已经登录了(You are already logged in)", null);
         } else {
-            return new ResponseBean(HttpStatus.OK.value(), "你是游客(You are guest)", null);
+            return new ResultUtil(HttpStatus.OK.value(), "你是游客(You are guest)", null);
         }
     }
 
@@ -32,6 +34,7 @@ public class UserController {
      */
     @GetMapping("/article2")
     @RequiresAuthentication
+    @RequiresPermissions("/user/article2")
     public ResponseBean requireAuth() {
         return new ResponseBean(HttpStatus.OK.value(), "您已经登录了(You are already logged in)", null);
     }
@@ -55,4 +58,5 @@ public class UserController {
 //        }
 //        throw new CustomException("剔除失败，Account不存在(Deletion Failed. Account does not exist.)");
 //    }
+
 }

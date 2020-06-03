@@ -1,5 +1,7 @@
 package cn.snowpa.utils;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -199,6 +201,30 @@ public class StringUtil {
 			}
 		}
 		return newMap;
+	}
+
+
+	public static String getValueByKey (String json,String key){
+		try {
+			if(StringUtil.isEmpty(json)){
+				return null;
+			}
+			String token = "";
+			int i = json.indexOf(key, 0);
+			if(i == -1){
+				return null;
+			}
+			json = json.substring(i+(key.length()+1));
+			int j = json.indexOf("&", 0);
+			if(j == -1){
+				return json;
+			}
+			token = json.substring(0,j);
+			return token;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public static String getTime(){

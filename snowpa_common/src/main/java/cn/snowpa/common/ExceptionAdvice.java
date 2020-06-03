@@ -35,7 +35,7 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(ShiroException.class)
     public ResultUtil handle401(ShiroException e) {
-        return ResultUtil.error("无权访问(Unauthorized):" + e.getMessage());
+        return ResultUtil.error("无权访问" + e.getMessage());
     }
 
     /**
@@ -44,7 +44,7 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthorizedException.class)
     public ResultUtil handle401(UnauthorizedException e) {
-        return ResultUtil.error("无权访问(Unauthorized):当前Subject没有此请求所需权限" + e.getMessage());
+        return ResultUtil.error("无权访问权限" + e.getMessage());
     }
 
     /**
@@ -54,7 +54,7 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UnauthenticatedException.class)
     public ResultUtil handle401(UnauthenticatedException e) {
-        return ResultUtil.error("无权访问(Unauthorized):当前Subject是匿名Subject，请先登录" + e.getMessage());
+        return ResultUtil.error("无权访问权限" + e.getMessage());
     }
 
     /**

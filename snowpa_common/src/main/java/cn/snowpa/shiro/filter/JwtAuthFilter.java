@@ -7,6 +7,9 @@ import cn.snowpa.shiro.common.Constant;
 import cn.snowpa.shiro.common.JWTToken;
 import cn.snowpa.shiro.common.ResponseBean;
 import cn.snowpa.shiro.util.JwtUtil;
+import cn.snowpa.utils.StringUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +17,7 @@ import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -21,6 +25,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * JWT过滤
@@ -42,7 +48,7 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) {
-        // 查看当前Header中是否携带Authorization属性(Token)，有的话就进行登录认证授权
+        // 查看当前Header中是否携带Headers属性(Token)，有的话就进行登录认证授权
         if (this.isLoginAttempt(request, response)) {
             try {
                 // 进行Shiro的登录UserRealm
@@ -80,7 +86,7 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
             String httpMethod = httpServletRequest.getMethod();
             // 获取当前请求URI
             String requestURI = httpServletRequest.getRequestURI();
-            log.info("当前请求 {} Authorization属性(Token)为空 请求类型 {}", requestURI, httpMethod);
+            log.info("当前请求 {} Headers属性(Token)为空 请求类型 {}", requestURI, httpMethod);
             // mustLoginFlag = true 开启任何请求必须登录才可访问
             final Boolean mustLoginFlag = false;
             if (mustLoginFlag) {
@@ -107,9 +113,12 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean isLoginAttempt(ServletRequest request, ServletResponse response) {
-        // 拿到当前Header中Authorization的AccessToken(Shiro中getAuthzHeader方法已经实现)
+        // 拿到当前Header中Headers的AccessToken(Shiro中getAuthzHeader方法已经实现)
         HttpServletRequest httpRequest = WebUtils.toHttp(request);
         String token = httpRequest.getHeader("token");
+        if(StringUtil.isEmpty(token)){
+            token = getToken(httpRequest);
+        }
         return token != null;
     }
 
@@ -121,6 +130,9 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
         // 拿到当前Header中token的
         HttpServletRequest httpRequest = WebUtils.toHttp(request);
         String token = httpRequest.getHeader("token");
+        if(StringUtil.isEmpty(token)){
+            token = getToken(httpRequest);
+        }
         JWTToken jwtToken = new JWTToken(token);
         // 提交给UserRealm进行认证，如果错误他会抛出异常并被捕获
         this.getSubject(request, response).login(jwtToken);
@@ -133,7 +145,17 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
      */
     @Override
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
-        // 跨域已经在OriginFilter处全局配置
+        // 跨域全局配置
+        HttpServletRequest httpServletRequest = WebUtils.toHttp(request);
+        HttpServletResponse httpServletResponse = WebUtils.toHttp(response);
+        httpServletResponse.setHeader("Access-control-Allow-Origin", httpServletRequest.getHeader("token"));
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PUT,DELETE");
+        httpServletResponse.setHeader("Access-Control-Allow-Headers", httpServletRequest.getHeader("Access-Control-Request-Headers"));
+        // 跨域时会首先发送一个OPTIONS请求，这里我们给OPTIONS请求直接返回正常状态
+        if (httpServletRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
+            httpServletResponse.setStatus(HttpStatus.OK.value());
+            return false;
+        }
         return super.preHandle(request, response);
     }
 
@@ -143,6 +165,9 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
     private boolean refreshToken(ServletRequest request, ServletResponse response) {
         HttpServletRequest httpRequest = WebUtils.toHttp(request);
         String token = httpRequest.getHeader("token");
+        if(StringUtil.isEmpty(token)){
+            token = getToken(httpRequest);
+        }
         // 获取当前Token的帐号信息
         String account = JwtUtil.getClaim(token, Constant.ACCOUNT);
         // 判断Redis中RefreshToken是否存在
@@ -180,11 +205,24 @@ public class JwtAuthFilter extends BasicHttpAuthenticationFilter {
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("application/json; charset=utf-8");
         try (PrintWriter out = httpServletResponse.getWriter()) {
-            String data = JsonConvertUtil.objectToJson(new ResponseBean(HttpStatus.UNAUTHORIZED.value(), "无权访问(Unauthorized):" + msg, null));
+            String data = JsonConvertUtil.objectToJson(new ResponseBean(HttpStatus.UNAUTHORIZED.value(), "无权访问:" + msg, null));
             out.append(data);
         } catch (IOException e) {
             log.error("直接返回Response信息出现IOException异常:{}", e.getMessage());
             throw new CustomException("直接返回Response信息出现IOException异常:" + e.getMessage());
         }
     }
+
+    private String getToken (HttpServletRequest httpRequest){
+        String token = null;
+        Map<String, String[]> map = httpRequest.getParameterMap();
+        if(map!=null){
+            String[] tokens = map.get("token");
+            if(tokens!=null && tokens.length>0){
+                token = tokens[0];
+            }
+        }
+        return token;
+    }
+
 }

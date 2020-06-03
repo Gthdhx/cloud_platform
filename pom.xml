@@ -15,7 +15,6 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <!-- 模块说明：这里声明多个子模块 -->
-
     <modules>
         <module>snowpa_common</module>
         <module>snowpa_mybatis</module>

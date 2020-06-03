@@ -58,9 +58,9 @@ public class JwtUtil {
             JWTVerifier verifier = JWT.require(algorithm).build();
             verifier.verify(token);
             return true;
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             log.error("JWTToken认证解密出现UnsupportedEncodingException异常:{}", e.getMessage());
-            throw new CustomException("JWTToken认证解密出现UnsupportedEncodingException异常:" + e.getMessage());
+            throw new CustomException("身份认证解密异常");
         }
     }
 
@@ -79,7 +79,7 @@ public class JwtUtil {
             return jwt.getClaim(claim).asString();
         } catch (JWTDecodeException e) {
             log.error("解密Token中的公共信息出现JWTDecodeException异常:{}", e.getMessage());
-            throw new CustomException("解密Token中的公共信息出现JWTDecodeException异常:" + e.getMessage());
+            throw new CustomException("身份认证解密异常");
         }
     }
 
@@ -105,7 +105,7 @@ public class JwtUtil {
                     .sign(algorithm);
         } catch (UnsupportedEncodingException e) {
             log.error("JWTToken加密出现UnsupportedEncodingException异常:{}", e.getMessage());
-            throw new CustomException("JWTToken加密出现UnsupportedEncodingException异常:" + e.getMessage());
+            throw new CustomException("身份认证解密异常");
         }
     }
 
