@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * 全局跨域放开
+ * 全局跨域放开1
  */
 @Component
 public class OriginFilter implements Filter {
